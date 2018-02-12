@@ -23,8 +23,10 @@ public class TestePersistirPais {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("IFSULModelPU");
         EntityManager em = emf.createEntityManager();
         Pais p = new Pais();
-        p.setNome("Méxi");
-        p.setIso("MEX");
+
+        p.setNome("Arg");
+        p.setIso("BRA");
+
         em.getTransaction().begin();
         em.persist(p);
         em.getTransaction().commit();
