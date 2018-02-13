@@ -5,6 +5,7 @@
  */
 package br.edu.ifsul.testes;
 
+import br.edu.ifsul.jpa.EntityManagerUtil;
 import br.edu.ifsul.modelo.Pais;
 import java.util.Set;
 import javax.persistence.EntityManager;
@@ -24,28 +25,18 @@ public class TestePersistirPais {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("IFSULModelPU");
-        EntityManager em = emf.createEntityManager();
+        // Criado o objeto do EntityManagerFactory
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("IFSULModelPU");
+        EntityManager em = EntityManagerUtil.getEntityManager();
         Pais p = new Pais();
 
-        p.setNome("Japão");
-        p.setIso("JAP");
-        
+        p.setNome("Coréia do Sul");
+        p.setIso("COS");
         em.getTransaction().begin();
-        
-        Validator validador = Validation.buildDefaultValidatorFactory().getValidator();
-        Set<ConstraintViolation<Pais>> erros = validador.validate(p);
-        if(erros.size() > 0){
-            for(ConstraintViolation<Pais> erro : erros){
-                System.out.println("Erro: " + erro.getMessage());
-            }
-        }else{
-             em.persist(p);
-        }
-       
+        em.persist(p);
         em.getTransaction().commit();
         em.close();
-        emf.close();
+//        emf.close();
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package br.edu.ifsul.testes;
 
+import br.edu.ifsul.jpa.EntityManagerUtil;
 import br.edu.ifsul.modelo.Pais;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,16 +21,16 @@ public class TesteAlterarPais {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("IFSULModelPU");
-        EntityManager em = emf.createEntityManager();
-        Pais p = em.find(Pais.class, 2);
-        p.setNome("Argentina");
-        p.setIso("ARG");
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("IFSULModelPU");
+        EntityManager em = EntityManagerUtil.getEntityManager();
+        Pais p = em.find(Pais.class, 12);
+        p.setNome("Coréia do Sul");
+        p.setIso("CDS");
         em.getTransaction().begin();
         em.merge(p);
         em.getTransaction().commit();
         em.close();
-        emf.close();
+//        emf.close();
         
     }
     
