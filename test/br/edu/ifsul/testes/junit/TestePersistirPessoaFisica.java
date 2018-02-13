@@ -8,6 +8,8 @@ package br.edu.ifsul.testes.junit;
 import br.edu.ifsul.jpa.EntityManagerUtil;
 import br.edu.ifsul.modelo.Estado;
 import br.edu.ifsul.modelo.Pais;
+import br.edu.ifsul.modelo.PessoaFisica;
+import java.util.Calendar;
 import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.Assert;
@@ -19,18 +21,17 @@ import static org.junit.Assert.*;
  *
  * @author ASUSX451
  */
-public class TestePersistirEstado {
+public class TestePersistirPessoaFisica {
 
     EntityManager em;
 
-    public TestePersistirEstado() {
+    public TestePersistirPessoaFisica() {
     }
 
     @Before
     public void setUp() {
 
         em = EntityManagerUtil.getEntityManager();
-
     }
 
     @After
@@ -42,12 +43,17 @@ public class TestePersistirEstado {
     public void teste() {
         boolean exception = false;
         try {
-            Estado es = new Estado();
-            es.setNome("Maranhão");
-            es.setUf("MA");
-            es.setPais(em.find(Pais.class, 1));
+            PessoaFisica pf = new PessoaFisica();
+            pf.setCpf("459.933.470-74");
+            pf.setEmail("diloan.silva@gmail.com");
+            pf.setNascimento(Calendar.getInstance());
+            pf.setNome("Diloan Siva");
+            pf.setNomeUsuario("diloansilva");
+            pf.setRg("7226918");
+            pf.setSenha("admin");
+            pf.setTelefone("(91)98960-3377");
             em.getTransaction().begin();
-            em.persist(es);
+            em.persist(pf);
             em.getTransaction().commit();
 
         } catch (Exception e) {

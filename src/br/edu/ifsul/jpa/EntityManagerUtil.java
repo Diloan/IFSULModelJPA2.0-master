@@ -14,16 +14,20 @@ import javax.persistence.Persistence;
  * @author ASUSX451
  */
 public class EntityManagerUtil {
-   private static EntityManagerFactory factory = null;
-   private static EntityManager em = null;
-   
-   public static EntityManager getEntityManager(){
-       if (factory == null) {
-           factory = Persistence.createEntityManagerFactory("IFSULModelPU");
-       }
-       if (em == null) {
-           em = factory.createEntityManager();
-       }
-       return em;
-   }
+
+    private static EntityManagerFactory factory = null;
+    private static EntityManager em = null;
+
+    public static EntityManager getEntityManager() {
+
+        if (factory == null) {
+            factory = Persistence.createEntityManagerFactory("IFSULModelPU");
+        }
+        if (em == null) {
+            em = factory.createEntityManager();
+        }
+
+        return em;
+
+    }
 }
