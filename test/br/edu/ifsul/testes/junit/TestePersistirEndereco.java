@@ -6,8 +6,12 @@
 package br.edu.ifsul.testes.junit;
 
 import br.edu.ifsul.jpa.EntityManagerUtil;
+import br.edu.ifsul.modelo.Endereco;
 import br.edu.ifsul.modelo.Estado;
 import br.edu.ifsul.modelo.Pais;
+import br.edu.ifsul.modelo.PessoaFisica;
+import br.edu.ifsul.modelo.TipoEndereco;
+import java.util.Calendar;
 import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.Assert;
@@ -19,18 +23,22 @@ import static org.junit.Assert.*;
  *
  * @author ASUSX451
  */
-public class TestePersistirEstado {
+public class TestePersistirEndereco {
 
     EntityManager em;
 
-    public TestePersistirEstado() {
+    public TestePersistirEndereco() {
     }
 
     @Before
     public void setUp() {
-
-        em = EntityManagerUtil.getEntityManager();
-
+        try {
+            em = EntityManagerUtil.getEntityManager();
+            
+        } catch (Exception e) {
+            System.out.println("Nulo");
+            e.printStackTrace();
+        }
     }
 
     @After
@@ -42,12 +50,19 @@ public class TestePersistirEstado {
     public void teste() {
         boolean exception = false;
         try {
-            Estado es = new Estado();
-            es.setNome("Amazonas");
-            es.setUf("AM");
-            es.setPais(em.find(Pais.class, 1));
+            PessoaFisica pf = em.find(PessoaFisica.class, 1);
+            Endereco e = new Endereco();
+            e.setBairro("Guanabara");
+            e.setCep("67010-320");
+            e.setComplemento("Altos e baixos");
+            e.setEndereco("Rosa vermelha");
+            e.setNickName("Dilo");
+            e.setNumero("487");
+            e.setReferencia("Perto do Edson"); 
+            e.setTipoEndereco(em.find(TipoEndereco.class, 1));
+            pf.adicionarEndereco(e);
             em.getTransaction().begin();
-            em.persist(es);
+            em.persist(pf);
             em.getTransaction().commit();
 
         } catch (Exception e) {
