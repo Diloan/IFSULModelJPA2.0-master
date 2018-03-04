@@ -6,10 +6,11 @@
 package br.edu.ifsul.testes.junit;
 
 import br.edu.ifsul.jpa.EntityManagerUtil;
+import br.edu.ifsul.modelo.Cidade;
 import br.edu.ifsul.modelo.Estado;
 import br.edu.ifsul.modelo.Pais;
 import br.edu.ifsul.modelo.PessoaFisica;
-import java.util.Calendar;
+import br.edu.ifsul.modelo.Produto;
 import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.Assert;
@@ -21,17 +22,23 @@ import static org.junit.Assert.*;
  *
  * @author ASUSX451
  */
-public class TestePersistirPessoaFisica {
+public class TestePersistirDesejos {
 
     EntityManager em;
 
-    public TestePersistirPessoaFisica() {
+    public TestePersistirDesejos() {
     }
 
     @Before
     public void setUp() {
-
+        try {
         em = EntityManagerUtil.getEntityManager();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        
+        }
+
     }
 
     @After
@@ -43,24 +50,17 @@ public class TestePersistirPessoaFisica {
     public void teste() {
         boolean exception = false;
         try {
-            PessoaFisica pf = new PessoaFisica();
-            pf.setCpf("031.450.022-79");
-            pf.setEmail("julianamends.lima@gmail.com");
-            pf.setNascimento(Calendar.getInstance());
-            pf.setNome("Juliana Mendes");
-            pf.setNomeUsuario("julianamendes");
-            
-//            pf.setNascimento(nascimento);
-            pf.setRg("000000");
-            pf.setSenha("julia");
-            pf.setTelefone("(91)92222-2222");
+            PessoaFisica pf = em.find(PessoaFisica.class, 2);
+            Produto p = em.find(Produto.class, 1);
+            pf.getDesejos().add(p);
             em.getTransaction().begin();
-            em.persist(pf);
+            em.persist(p);
             em.getTransaction().commit();
 
         } catch (Exception e) {
             exception = true;
             e.printStackTrace();
+            e.getMessage();
         }
         Assert.assertEquals(false, exception);
     }

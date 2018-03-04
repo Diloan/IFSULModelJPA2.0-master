@@ -6,10 +6,10 @@
 package br.edu.ifsul.testes.junit;
 
 import br.edu.ifsul.jpa.EntityManagerUtil;
+import br.edu.ifsul.modelo.Cidade;
 import br.edu.ifsul.modelo.Estado;
 import br.edu.ifsul.modelo.Pais;
-import br.edu.ifsul.modelo.PessoaFisica;
-import java.util.Calendar;
+import br.edu.ifsul.modelo.Permissao;
 import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.Assert;
@@ -21,17 +21,18 @@ import static org.junit.Assert.*;
  *
  * @author ASUSX451
  */
-public class TestePersistirPessoaFisica {
+public class TestePersistirPermissao {
 
     EntityManager em;
 
-    public TestePersistirPessoaFisica() {
+    public TestePersistirPermissao() {
     }
 
     @Before
     public void setUp() {
 
         em = EntityManagerUtil.getEntityManager();
+
     }
 
     @After
@@ -43,19 +44,15 @@ public class TestePersistirPessoaFisica {
     public void teste() {
         boolean exception = false;
         try {
-            PessoaFisica pf = new PessoaFisica();
-            pf.setCpf("031.450.022-79");
-            pf.setEmail("julianamends.lima@gmail.com");
-            pf.setNascimento(Calendar.getInstance());
-            pf.setNome("Juliana Mendes");
-            pf.setNomeUsuario("julianamendes");
-            
-//            pf.setNascimento(nascimento);
-            pf.setRg("000000");
-            pf.setSenha("julia");
-            pf.setTelefone("(91)92222-2222");
+            Permissao p1 = new Permissao();
+            p1.setNome("Administrador");
+            p1.setDescricao("Administrador do sistema");
+            Permissao p2 = new Permissao();
+            p2.setNome("Usuario");
+            p2.setDescricao("Usuarios do sistema");
             em.getTransaction().begin();
-            em.persist(pf);
+            em.persist(p1);
+            em.persist(p2);
             em.getTransaction().commit();
 
         } catch (Exception e) {

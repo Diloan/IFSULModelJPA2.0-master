@@ -6,6 +6,7 @@
 package br.edu.ifsul.testes.junit;
 
 import br.edu.ifsul.jpa.EntityManagerUtil;
+import br.edu.ifsul.modelo.Cidade;
 import br.edu.ifsul.modelo.Endereco;
 import br.edu.ifsul.modelo.Estado;
 import br.edu.ifsul.modelo.Pais;
@@ -60,6 +61,7 @@ public class TestePersistirEndereco {
             e.setNumero("487");
             e.setReferencia("Perto do Edson"); 
             e.setTipoEndereco(em.find(TipoEndereco.class, 1));
+            e.setCidade(em.find(Cidade.class, 1));
             pf.adicionarEndereco(e);
             em.getTransaction().begin();
             em.persist(pf);

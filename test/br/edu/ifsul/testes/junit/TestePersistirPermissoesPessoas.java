@@ -6,10 +6,12 @@
 package br.edu.ifsul.testes.junit;
 
 import br.edu.ifsul.jpa.EntityManagerUtil;
+import br.edu.ifsul.modelo.Cidade;
 import br.edu.ifsul.modelo.Estado;
 import br.edu.ifsul.modelo.Pais;
+import br.edu.ifsul.modelo.Permissao;
 import br.edu.ifsul.modelo.PessoaFisica;
-import java.util.Calendar;
+import br.edu.ifsul.modelo.Produto;
 import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.Assert;
@@ -21,17 +23,23 @@ import static org.junit.Assert.*;
  *
  * @author ASUSX451
  */
-public class TestePersistirPessoaFisica {
+public class TestePersistirPermissoesPessoas {
 
     EntityManager em;
 
-    public TestePersistirPessoaFisica() {
+    public TestePersistirPermissoesPessoas() {
     }
 
     @Before
     public void setUp() {
-
+        try {
         em = EntityManagerUtil.getEntityManager();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        
+        }
+
     }
 
     @After
@@ -43,17 +51,12 @@ public class TestePersistirPessoaFisica {
     public void teste() {
         boolean exception = false;
         try {
-            PessoaFisica pf = new PessoaFisica();
-            pf.setCpf("031.450.022-79");
-            pf.setEmail("julianamends.lima@gmail.com");
-            pf.setNascimento(Calendar.getInstance());
-            pf.setNome("Juliana Mendes");
-            pf.setNomeUsuario("julianamendes");
+            PessoaFisica pf = em.find(PessoaFisica.class, 2);
+            Permissao p1 = em.find(Permissao.class, "Administrador");
+            Permissao p2 = em.find(Permissao.class, "Usuario");
+            pf.getPermissoes().add(p1);
+            pf.getPermissoes().add(p2);
             
-//            pf.setNascimento(nascimento);
-            pf.setRg("000000");
-            pf.setSenha("julia");
-            pf.setTelefone("(91)92222-2222");
             em.getTransaction().begin();
             em.persist(pf);
             em.getTransaction().commit();
@@ -61,6 +64,7 @@ public class TestePersistirPessoaFisica {
         } catch (Exception e) {
             exception = true;
             e.printStackTrace();
+            e.getMessage();
         }
         Assert.assertEquals(false, exception);
     }

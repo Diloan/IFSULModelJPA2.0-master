@@ -55,6 +55,7 @@ public class Pessoa implements Serializable{
     @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Endereco> enderecos = new ArrayList<>();
     
+    
     public Pessoa() {
     }
 

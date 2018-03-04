@@ -12,9 +12,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.ForeignKey;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -34,6 +37,11 @@ public class Cidade implements Serializable{
     @NotNull(message = "O nome não pode ser nulo")
     @Column(name = "nome", length = 50, nullable = false)
     private String nome;
+    @NotNull(message = "O Estado deve ser informado")
+    @ManyToOne
+    @JoinColumn(name = "estado", referencedColumnName = "id", nullable = false)
+    @ForeignKey(name = "fk_estado_id")
+    private Estado estado;
 
     public Cidade() {
     }
@@ -91,6 +99,20 @@ public class Cidade implements Serializable{
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return the estado
+     */
+    public Estado getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
     
     
