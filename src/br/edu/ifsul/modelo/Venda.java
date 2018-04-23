@@ -1,113 +1,134 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifsul.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author ASUSX451
+ * @author Prof. Me. Jorge Luis Boeira Bavaresco
+ * @email jorge.bavaresco@passofundo.ifsul.edu.br
+ * @organization IFSUL - Campus Passo Fundo
  */
 @Entity
 @Table(name = "venda")
-public class Venda implements Serializable{
+public class Venda implements Serializable {
+
     @Id
     @SequenceGenerator(name = "seq_venda", sequenceName = "seq_venda_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_venda", strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull(message = "A data não pode ser nula")
     @Temporal(TemporalType.DATE)
     @Column(name = "data", nullable = false)
     private Calendar data;
-    
+    @NotNull(message = "O valor total deve ser informado")
+    @Min(value = 0, message = "O valor total não pode ser negativo")
+    @Column(name = "valor_total", nullable = false, columnDefinition = "decimal(12,2)")
     private Double valorTotal;
+    @NotNull(message = "A quantidade de parcelas deve ser informada")
+    @Min(value = 0, message = "A quantidade de parcelas não pode ser negativo")
+    @Column(name = "parcelas", nullable = false)
     private Integer parcelas;
+    @NotNull(message = "A pessoa fisica não pode ser nula")
+    @ManyToOne
+    @JoinColumn(name = "pessoa_fisica", referencedColumnName = "id", nullable = false)
     private PessoaFisica pessoaFisica;
-
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = false, 
+            fetch = FetchType.LAZY)
+    private List<VendaItens> itens = new ArrayList<>();
+    @OneToMany(mappedBy = "parcelaID.venda", cascade = CascadeType.ALL, orphanRemoval = false, 
+            fetch = FetchType.LAZY)
+    private List<Parcela> listaParcela = new ArrayList<>();
+    
+    
     public Venda() {
+        this.valorTotal = 0.0;
+    }
+    
+    public void gerarParcelas(){
+        Double valorParcela = this.valorTotal / this.parcelas;
+        for(int i = 1; i <= this.parcelas; i++){
+            Parcela p = new Parcela();
+            ParcelaID id = new ParcelaID();
+            id.setNumero(i);
+            id.setVenda(this);
+            p.setParcelaID(id);
+            p.setValor(valorParcela);
+            Calendar vencimento = (Calendar) this.data.clone();
+            vencimento.add(Calendar.MONTH, i);
+            p.setVencimento(vencimento);
+            this.listaParcela.add(p);
+            
+        }
     }
 
+    public void adicionarItem(VendaItens obj){
+        obj.setVenda(this);
+        this.valorTotal += obj.getValorTotal();
+        this.itens.add(obj);
+    }
     
+    public void removerItem(int index){
+        VendaItens obj = this.itens.get(index);
+        this.valorTotal -= obj.getValorTotal();
+        this.itens.remove(index);
+    }
     
-    /**
-     * @return the id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * @return the data
-     */
     public Calendar getData() {
         return data;
     }
 
-    /**
-     * @param data the data to set
-     */
     public void setData(Calendar data) {
         this.data = data;
     }
 
-    /**
-     * @return the valorTotal
-     */
     public Double getValorTotal() {
         return valorTotal;
     }
 
-    /**
-     * @param valorTotal the valorTotal to set
-     */
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
     }
 
-    /**
-     * @return the parcelas
-     */
     public Integer getParcelas() {
         return parcelas;
     }
 
-    /**
-     * @param parcelas the parcelas to set
-     */
     public void setParcelas(Integer parcelas) {
         this.parcelas = parcelas;
     }
 
-    /**
-     * @return the pessoaFisica
-     */
     public PessoaFisica getPessoaFisica() {
         return pessoaFisica;
     }
 
-    /**
-     * @param pessoaFisica the pessoaFisica to set
-     */
     public void setPessoaFisica(PessoaFisica pessoaFisica) {
         this.pessoaFisica = pessoaFisica;
     }
@@ -115,7 +136,7 @@ public class Venda implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -136,6 +157,28 @@ public class Venda implements Serializable{
         }
         return true;
     }
- 
+
+    public List<VendaItens> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<VendaItens> itens) {
+        this.itens = itens;
+    }
+
+    /**
+     * @return the listaParcela
+     */
+    public List<Parcela> getListaParcela() {
+        return listaParcela;
+    }
+
+    /**
+     * @param listaParcela the listaParcela to set
+     */
+    public void setListaParcela(List<Parcela> listaParcela) {
+        this.listaParcela = listaParcela;
+    }
+
     
 }

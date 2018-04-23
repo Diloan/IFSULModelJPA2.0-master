@@ -54,12 +54,12 @@ public class TestePersistirProduto {
 //            Marca m = new Marca();
 //            m.setNome("Motorola");
             Produto p = new Produto();
-            p.setNome("Moto X4");
+            p.setNome("Moto Z²");
             p.setCategoria(em.find(Categoria.class, 1));
             p.setMarca(em.find(Marca.class, 1));
             p.setDescricao("Smartphone top de linha");
-            p.setPreco(1390.00);
-            p.setQuantidadeEstoque(5.00);
+            p.setPreco(1600.00);
+            p.setQuantidadeEstoque(2.00);
             em.getTransaction().begin();
 //            em.persist(c);
 //            em.persist(m);
