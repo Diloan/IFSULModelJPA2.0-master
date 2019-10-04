@@ -52,7 +52,7 @@ public class TestePersistirCompra {
         try {
    
             Produto p = em.find(Produto.class, 2);
-            PessoaJuridica pj = em.find(PessoaJuridica.class, 9);
+            PessoaJuridica pj = em.find(PessoaJuridica.class, 2);
             Compra obj = new Compra();
             CompraID id = new CompraID();
             id.setPessoaJuridica(pj);

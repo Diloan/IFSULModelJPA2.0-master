@@ -42,9 +42,9 @@ public class TestePersistirPessoaJuridica {
         boolean exception = false;
         try {
             PessoaJuridica pj = new PessoaJuridica();       
-            pj.setEmail("samira.samea@gmail.com");            
-            pj.setNome("Samira Sâmea");            
-            pj.setTelefone("(91)93233-4851");
+            pj.setEmail("maria.rosa@gmail.com");            
+            pj.setNome("Maria Rosa");            
+            pj.setTelefone("(91)93333-4444");
             pj.setCnpj("20.232/0001-22");
             pj.setIe("000056789012345");
             em.getTransaction().begin();

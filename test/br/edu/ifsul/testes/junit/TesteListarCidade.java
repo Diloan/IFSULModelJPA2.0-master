@@ -9,8 +9,7 @@ import br.edu.ifsul.jpa.EntityManagerUtil;
 import br.edu.ifsul.modelo.Cidade;
 import br.edu.ifsul.modelo.Estado;
 import br.edu.ifsul.modelo.Pais;
-import br.edu.ifsul.modelo.PessoaFisica;
-import br.edu.ifsul.modelo.Produto;
+import java.util.List;
 import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.Assert;
@@ -22,22 +21,17 @@ import static org.junit.Assert.*;
  *
  * @author ASUSX451
  */
-public class TestePersistirDesejos {
+public class TesteListarCidade {
 
     EntityManager em;
 
-    public TestePersistirDesejos() {
+    public TesteListarCidade() {
     }
 
     @Before
     public void setUp() {
-        try {
+
         em = EntityManagerUtil.getEntityManager();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        
-        }
 
     }
 
@@ -50,17 +44,16 @@ public class TestePersistirDesejos {
     public void teste() {
         boolean exception = false;
         try {
-            PessoaFisica pf = em.find(PessoaFisica.class, 3);
-            Produto p = em.find(Produto.class, 1);
-            pf.getDesejos().add(p);
-            em.getTransaction().begin();
-            em.persist(p);
-            em.getTransaction().commit();
+            //Usando JPA Query Language
+            String jpql = "from Cidade order by nome";
+            List<Cidade> listaCid = em.createQuery(jpql).getResultList();
+            for(Cidade c : listaCid){
+                System.out.println("ID: " + c.getId() + " Nome: " + c.getNome() + " Estado: " + c.getEstado().getNome());
+            }
 
         } catch (Exception e) {
             exception = true;
             e.printStackTrace();
-            e.getMessage();
         }
         Assert.assertEquals(false, exception);
     }

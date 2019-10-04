@@ -6,11 +6,10 @@
 package br.edu.ifsul.testes.junit;
 
 import br.edu.ifsul.jpa.EntityManagerUtil;
+import br.edu.ifsul.modelo.Categoria;
 import br.edu.ifsul.modelo.Cidade;
 import br.edu.ifsul.modelo.Estado;
 import br.edu.ifsul.modelo.Pais;
-import br.edu.ifsul.modelo.PessoaFisica;
-import br.edu.ifsul.modelo.Produto;
 import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.Assert;
@@ -22,22 +21,17 @@ import static org.junit.Assert.*;
  *
  * @author ASUSX451
  */
-public class TestePersistirDesejos {
+public class TestePersistirCategoria {
 
     EntityManager em;
 
-    public TestePersistirDesejos() {
+    public TestePersistirCategoria() {
     }
 
     @Before
     public void setUp() {
-        try {
+
         em = EntityManagerUtil.getEntityManager();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        
-        }
 
     }
 
@@ -50,17 +44,15 @@ public class TestePersistirDesejos {
     public void teste() {
         boolean exception = false;
         try {
-            PessoaFisica pf = em.find(PessoaFisica.class, 3);
-            Produto p = em.find(Produto.class, 1);
-            pf.getDesejos().add(p);
+            Categoria ca = new Categoria();
+            ca.setNome("Smartphines");
             em.getTransaction().begin();
-            em.persist(p);
+            em.persist(ca);
             em.getTransaction().commit();
 
         } catch (Exception e) {
             exception = true;
             e.printStackTrace();
-            e.getMessage();
         }
         Assert.assertEquals(false, exception);
     }

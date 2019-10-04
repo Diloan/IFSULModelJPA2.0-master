@@ -6,11 +6,15 @@
 package br.edu.ifsul.testes.junit;
 
 import br.edu.ifsul.jpa.EntityManagerUtil;
-import br.edu.ifsul.modelo.Cidade;
-import br.edu.ifsul.modelo.Estado;
-import br.edu.ifsul.modelo.Pais;
-import br.edu.ifsul.modelo.PessoaFisica;
+import br.edu.ifsul.modelo.Categoria;
+import br.edu.ifsul.modelo.Foto;
+import br.edu.ifsul.modelo.Marca;
 import br.edu.ifsul.modelo.Produto;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.persistence.EntityManager;
 import org.junit.After;
 import org.junit.Assert;
@@ -22,47 +26,47 @@ import static org.junit.Assert.*;
  *
  * @author ASUSX451
  */
-public class TestePersistirDesejos {
-
+public class TesteLerFoto {
+    
     EntityManager em;
-
-    public TestePersistirDesejos() {
+    
+    public TesteLerFoto() {
     }
-
+    
     @Before
     public void setUp() {
         try {
-        em = EntityManagerUtil.getEntityManager();
             
+        em = EntityManagerUtil.getEntityManager();
         } catch (Exception e) {
             e.printStackTrace();
         
         }
-
+        
     }
-
+    
     @After
     public void tearDown() {
+        
         em.close();
+        
     }
-
     @Test
-    public void teste() {
+    public void Teste(){
         boolean exception = false;
         try {
-            PessoaFisica pf = em.find(PessoaFisica.class, 3);
-            Produto p = em.find(Produto.class, 1);
-            pf.getDesejos().add(p);
-            em.getTransaction().begin();
-            em.persist(p);
-            em.getTransaction().commit();
 
+           Foto f = em.find(Foto.class, 1);
+           File file = new File("Passar path de um arquivo com extensao");
+           FileOutputStream out = new FileOutputStream(file);
+           out.write(f.getArquivo());
+           out.close();
+           
         } catch (Exception e) {
             exception = true;
             e.printStackTrace();
-            e.getMessage();
         }
         Assert.assertEquals(false, exception);
     }
-
+    
 }

@@ -37,7 +37,6 @@ public class TestePersistirEndereco {
             em = EntityManagerUtil.getEntityManager();
             
         } catch (Exception e) {
-            System.out.println("Nulo");
             e.printStackTrace();
         }
     }
@@ -51,17 +50,17 @@ public class TestePersistirEndereco {
     public void teste() {
         boolean exception = false;
         try {
-            PessoaFisica pf = em.find(PessoaFisica.class, 1);
+            PessoaFisica pf = em.find(PessoaFisica.class, 3);
             Endereco e = new Endereco();
-            e.setBairro("Guanabara");
-            e.setCep("67010-320");
-            e.setComplemento("Altos e baixos");
-            e.setEndereco("Rosa vermelha");
-            e.setNickName("Dilo");
-            e.setNumero("487");
-            e.setReferencia("Perto do Edson"); 
+            e.setBairro("Barra da Tijuca");
+            e.setCep("69810-320");
+            e.setComplemento("Casa");
+            e.setEndereco("Rosa das flores");
+            e.setNickName("John");
+            e.setNumero("345");
+            e.setReferencia("Perto de alguma coisa"); 
             e.setTipoEndereco(em.find(TipoEndereco.class, 1));
-            e.setCidade(em.find(Cidade.class, 1));
+            e.setCidade(em.find(Cidade.class, 2));
             pf.adicionarEndereco(e);
             em.getTransaction().begin();
             em.persist(pf);

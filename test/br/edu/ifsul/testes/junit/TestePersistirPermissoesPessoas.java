@@ -51,7 +51,7 @@ public class TestePersistirPermissoesPessoas {
     public void teste() {
         boolean exception = false;
         try {
-            PessoaFisica pf = em.find(PessoaFisica.class, 2);
+            PessoaFisica pf = em.find(PessoaFisica.class, 3);
             Permissao p1 = em.find(Permissao.class, "Administrador");
             Permissao p2 = em.find(Permissao.class, "Usuario");
             pf.getPermissoes().add(p1);

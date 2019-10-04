@@ -14,7 +14,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -49,20 +48,15 @@ public class TestePersistirProduto {
     public void Teste(){
         boolean exception = false;
         try {
-//            Categoria c = new Categoria();
-//            c.setNome("Smartphone");
-//            Marca m = new Marca();
-//            m.setNome("Motorola");
+//           
             Produto p = new Produto();
-            p.setNome("Moto Z²");
-            p.setCategoria(em.find(Categoria.class, 1));
-            p.setMarca(em.find(Marca.class, 1));
-            p.setDescricao("Smartphone top de linha");
+            p.setNome("Moto Z4");
+            p.setCategoria(em.find(Categoria.class, 2));
+            p.setMarca(em.find(Marca.class, 2));
+            p.setDescricao("Aparelho intermediário/top de linha");
             p.setPreco(1600.00);
             p.setQuantidadeEstoque(2.00);
             em.getTransaction().begin();
-//            em.persist(c);
-//            em.persist(m);
             em.persist(p);
             em.getTransaction().commit();
             
