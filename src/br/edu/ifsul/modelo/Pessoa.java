@@ -27,7 +27,8 @@ import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
- * @author ASUSX451
+ * @author Diloan Silva
+ * @email diloan.silva@gmail.com
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)

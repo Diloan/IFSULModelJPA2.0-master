@@ -24,9 +24,8 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Prof. Me. Jorge Luis Boeira Bavaresco
- * @email jorge.bavaresco@passofundo.ifsul.edu.br
- * @organization IFSUL - Campus Passo Fundo
+ * @author Diloan Silva
+ * @email diloan.silva@gmail.com
  */
 @Entity
 @Table(name = "venda")

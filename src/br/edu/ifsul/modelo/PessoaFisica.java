@@ -26,7 +26,8 @@ import org.hibernate.validator.constraints.br.CPF;
 
 /**
  *
- * @author ASUSX451
+ * @author Diloan Silva
+ * @email diloan.silva@gmail.com
  */
 @Entity
 @Table(name = "pessoa_fisica")

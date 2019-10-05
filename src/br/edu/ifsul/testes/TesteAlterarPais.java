@@ -13,7 +13,8 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author ASUSX451
+ * @author Diloan Silva
+ * @email diloan.silva@gmail.com
  */
 public class TesteAlterarPais {
 

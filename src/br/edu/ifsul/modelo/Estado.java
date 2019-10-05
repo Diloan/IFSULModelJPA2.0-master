@@ -23,7 +23,8 @@ import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
- * @author Diloan
+ * @author Diloan Silva
+ * @email diloan.silva@gmail.com
  */
 @Entity
 @Table(name = "estado")

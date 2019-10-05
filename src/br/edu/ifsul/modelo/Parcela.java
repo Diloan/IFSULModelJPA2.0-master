@@ -19,7 +19,8 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author ASUSX451
+ * @author Diloan Silva
+ * @email diloan.silva@gmail.com
  */
 @Entity
 @Table(name = "parcela")

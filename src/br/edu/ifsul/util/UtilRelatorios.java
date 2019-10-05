@@ -16,7 +16,8 @@ import java.util.List;
 
 /**
  *
- * @author Diloan Silva <diloan.silva@gmail.com>
+ * @author Diloan Silva
+ * @email diloan.silva@gmail.com
  */
 public class UtilRelatorios {
 

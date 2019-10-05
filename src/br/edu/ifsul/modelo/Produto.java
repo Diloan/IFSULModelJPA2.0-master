@@ -28,8 +28,8 @@ import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
- * @author Jorge Luis Boeira Bavaresco
- * @email jorge.bavaresco@passofundo.ifsul.edu.br
+ * @author Diloan Silva
+ * @email diloan.silva@gmail.com
  */
 @Entity
 @Table(name = "produto")

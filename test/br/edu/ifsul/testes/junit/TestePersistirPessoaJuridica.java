@@ -12,7 +12,8 @@ import org.junit.Test;
 
 /**
  *
- * @author jorge
+ * @author Diloan Silva
+ * @email diloan.silva@gmail.com
  */
 public class TestePersistirPessoaJuridica {
     

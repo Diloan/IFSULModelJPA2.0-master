@@ -15,7 +15,8 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author ASUSX451
+ * @author Diloan Silva
+ * @email diloan.silva@gmail.com
  */
 @Embeddable
 public class ParcelaID implements Serializable{

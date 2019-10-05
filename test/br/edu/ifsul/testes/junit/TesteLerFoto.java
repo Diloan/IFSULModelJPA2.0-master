@@ -24,7 +24,8 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author ASUSX451
+ * @author Diloan Silva
+ * @email diloan.silva@gmail.com
  */
 public class TesteLerFoto {
     
