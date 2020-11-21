@@ -45,8 +45,8 @@ public class TestePersistirCidade {
         boolean exception = false;
         try {
             Cidade c = new Cidade();
-            c.setNome("Ananindeua");
-            c.setEstado(em.find(Estado.class, 3));
+            c.setNome("São Luiz");
+            c.setEstado(em.find(Estado.class, 6));
             em.getTransaction().begin();
             em.persist(c);
             em.getTransaction().commit();

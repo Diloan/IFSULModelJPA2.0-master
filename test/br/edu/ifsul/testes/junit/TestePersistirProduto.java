@@ -53,7 +53,7 @@ public class TestePersistirProduto {
             Produto p = new Produto();
             p.setNome("Moto Z4");
             p.setCategoria(em.find(Categoria.class, 2));
-            p.setMarca(em.find(Marca.class, 2));
+            p.setMarca(em.find(Marca.class, 3));
             p.setDescricao("Aparelho intermediário/top de linha");
             p.setPreco(1600.00);
             p.setQuantidadeEstoque(2.00);

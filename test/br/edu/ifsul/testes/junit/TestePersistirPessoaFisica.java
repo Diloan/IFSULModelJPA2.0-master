@@ -45,16 +45,16 @@ public class TestePersistirPessoaFisica {
         boolean exception = false;
         try {
             PessoaFisica pf = new PessoaFisica();
-            pf.setCpf("039.860.150-00");
-            pf.setEmail("diloan.diloan@gmail.com");
+            pf.setCpf("827.168.490-64");
+            pf.setEmail("joao.joao@gmail.com");
             pf.setNascimento(Calendar.getInstance());
-            pf.setNome("Diloan Silva");
-            pf.setNomeUsuario("diloansilva");
+            pf.setNome("Joao Silva");
+            pf.setNomeUsuario("joaosilva");
             
 //            pf.setNascimento(nascimento);
-            pf.setRg("000000");
-            pf.setSenha("diloan");
-            pf.setTelefone("(91)92222-2222");
+            pf.setRg("0125899");
+            pf.setSenha("joao");
+            pf.setTelefone("(91)93333-3333");
             em.getTransaction().begin();
             em.persist(pf);
             em.getTransaction().commit();

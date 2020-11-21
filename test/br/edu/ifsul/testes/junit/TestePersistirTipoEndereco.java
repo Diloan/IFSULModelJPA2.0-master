@@ -46,7 +46,7 @@ public class TestePersistirTipoEndereco {
         boolean exception = false;
         try {
             TipoEndereco te = new TipoEndereco();
-            te.setDescricao("Residencial");
+            te.setDescricao("Trabalho");
             em.getTransaction().begin();
             em.persist(te);
             em.getTransaction().commit();

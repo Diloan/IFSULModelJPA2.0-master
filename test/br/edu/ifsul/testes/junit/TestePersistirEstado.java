@@ -44,9 +44,9 @@ public class TestePersistirEstado {
         boolean exception = false;
         try {
             Estado es = new Estado();
-            es.setNome("Rio Janeiro");
-            es.setUf("RJ");
-            es.setPais(em.find(Pais.class, 1));
+            es.setNome("Maranhão");
+            es.setUf("MA");
+            es.setPais(em.find(Pais.class, 15));
             em.getTransaction().begin();
             em.persist(es);
             em.getTransaction().commit();
